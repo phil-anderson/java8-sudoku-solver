@@ -27,10 +27,10 @@ public class SudokuSolver
         grid.addChangeListeners(Arrays.copyOf(solvers, solveLevel));
     }
 
-    public boolean solveGridText(String... lines)
+    public boolean solveGridText(String gridText)
     {
         GridTextParser parser = new GridTextParser(grid);
-        parser.parseStrings(lines);
+        parser.parseString(gridText);
         return grid.isSolved();
     }
 

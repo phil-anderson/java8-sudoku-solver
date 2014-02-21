@@ -5,17 +5,15 @@ import model.Group;
 
 public class SolutionValidator
 {
-    public static boolean validate(Grid grid)
+    public boolean validate(Grid grid)
     {
-        return grid.groupStream().allMatch(SolutionValidator::isGroupValid);
+        return grid.groupStream().allMatch(this::isGroupValid);
     }
 
-    private static boolean isGroupValid(Group group)
+    private boolean isGroupValid(Group group)
     {
-        for(int i = 1; i <= 9; i++)
-        {
-            if(!group.hasSolved(i)) return false;
-        }
+        for(int i = 1; i <= 9; i++) if(!group.hasSolved(i)) return false;
+
         return true;
     }
 }

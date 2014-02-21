@@ -68,15 +68,15 @@ public class GridTest
     private void makeSolvedGrid()
     {
         GridTextParser parser = new GridTextParser(grid);
-        parser.parseStrings("123456789",
-                                   "456789123",
-                                   "789123456",
-                                   "234567891",
-                                   "567891234",
-                                   "891234567",
-                                   "345678912",
-                                   "678912345",
-                                   "912345678");
+        parser.parseString("123456789\n" +
+                           "456789123\n" +
+                           "789123456\n" +
+                           "234567891\n" +
+                           "567891234\n" +
+                           "891234567\n" +
+                           "345678912\n" +
+                           "678912345\n" +
+                           "912345678\n");
     }
 
     private static class FlaggingSolver implements ISolver

@@ -10,43 +10,46 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GridTextParserTest
 {
-    private String[] inputStrings;
+    private Grid grid;
     private GridTextParser gridTextParserUnderTest;
+    private String inputString;
 
     @Before
     public void setUp()
     {
-        inputStrings = new String[] { "....1....",
-                                      ".2.....3.",
-                                      "..4...5..",
-                                      "6.......7",
-                                      "...8.....",
-                                      ".....9...",
-                                      "1.......2",
-                                      ".3.......",
-                                      ".....4..." };
-        gridTextParserUnderTest = new GridTextParser(new Grid());
+        grid = new Grid();
+        gridTextParserUnderTest = new GridTextParser(grid);
+        inputString = "....1....\n" +
+                      ".2.....3.\n" +
+                      "..4...5..\n" +
+                      "6.......7\n" +
+                      "...8.....\n" +
+                      ".....9...\n" +
+                      "1.......2\n" +
+                      ".3.......\n" +
+                      ".....4...\n";
     }
 
     @Test
     public void canParseBoardFromStrings()
     {
-        Grid grid = gridTextParserUnderTest.parseStrings(inputStrings);
+        gridTextParserUnderTest.parseString(inputString);
 
-        assertSolved(grid, 0, 4, 1);
-        assertNotSolved(grid, 3, 5);
-        assertSolved(grid, 8, 5, 4);
-        assertNotSolved(grid, 7, 8);
+        assertNotSolved(3, 5);
+        assertNotSolved(7, 8);
+
+        assertSolved(0, 4, 1);
+        assertSolved(8, 5, 4);
     }
 
-    private void assertSolved(Grid grid, int row, int column, int expectedValue)
+    private void assertSolved(int row, int column, int expectedValue)
     {
         Cell cell = grid.getCellAt(row, column);
         assertThat(cell.isSolved(), is(true));
         assertThat(cell.getSolution(), is(expectedValue));
     }
 
-    private void assertNotSolved(Grid grid, int row, int column)
+    private void assertNotSolved(int row, int column)
     {
         Cell cell = grid.getCellAt(row, column);
         assertThat(cell.isSolved(), is(false));
